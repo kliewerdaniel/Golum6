@@ -2,7 +2,7 @@
 [build]
   command = "# no build command"
   functions = "/Users/daniel/golum6/Golum6/netlify/functions"
-  publish = "_site"
+  publish = "Users/daniel/golum6/Golum6/netlify/functions/_siteite"
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
