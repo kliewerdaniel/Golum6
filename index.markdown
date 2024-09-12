@@ -4,10 +4,6 @@ title: Daniel Kliewer
 description: Exploring machine learning and web development
 ---
 
-<footer>
-  <p>&copy; {{ site.time | date: '%Y' }} Daniel Kliewer. All rights reserved.</p>
-</footer>
-
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
   if (window.netlifyIdentity) {
