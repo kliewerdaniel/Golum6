@@ -23,7 +23,7 @@ Through this blog, I hope to share my journey and insights with fellow tech enth
 ## Get in Touch
 
 - Email: [danielkliewer@gmail.com](mailto:danielkliewer@gmail.com)
-- GitHub: [Your GitHub Profile](https://github.com/kliewerdaniel)
+- GitHub: [kliewerdaniel](https://github.com/kliewerdaniel)
 
 ---
 
