@@ -24,44 +24,43 @@ Make sure you have the following installed on your system:
 
 1. Install Git:
 
-   ```bash
    sudo apt-get update
    sudo apt-get install git
+   
 Install Docker and Docker Compose: Follow the official Docker documentation for your OS.
 Install Ruby using rbenv:
-bash
 
-Copy
+
+
 sudo apt-get install rbenv
 rbenv install 3.0.0
 rbenv global 3.0.0
 Install Bundler and Jekyll:
-bash
 
-Copy
+
 gem install bundler jekyll
 Install Node.js and npm:
-bash
 
-Copy
+
+
 sudo apt-get install nodejs npm
 Install Netlify CLI:
-bash
 
-Copy
+
+
 npm install netlify-cli -g
 Install Ollama: Follow the instructions at Ollama for your operating system.
 Getting Started
 Clone the Repository:
-bash
 
-Copy
+
+
 git clone https://github.com/kliewerdaniel/golum2.git
 cd golum2
 Run the Setup Script:
-bash
 
-Copy
+
+
 chmod +x golum.sh
 ./golum.sh
 The script will set up your Jekyll blog with Netlify CMS, Docker, and now includes steps for Ollama integration.
@@ -69,9 +68,9 @@ Ollama Integration
 The setup script now includes steps to integrate Ollama for AI-enhanced content generation:
 
 Create a Python script for AI content generation (ai_content_generator.py):
-python
 
-Copy
+
+
 import subprocess
 import sys
 
@@ -100,9 +99,9 @@ if __name__ == "__main__":
     print("\nGenerated Comments:")
     print(comments)
 Create a Jekyll plugin to use the AI content generator (_plugins/ai_content_generator.rb):
-ruby
 
-Copy
+
+
 require 'open3'
 
 module Jekyll
@@ -140,9 +139,9 @@ After setting up the AI content generator and Jekyll plugin, you can now leverag
 
 AI-Generated Comments: The plugin will automatically generate AI comments for each blog post during the Jekyll build process.
 Display AI Comments: Update your post layout (_layouts/post.html) to display the AI-generated comments:
-html
 
-Copy
+
+
 {% raw %}
 {% if page.ai_comments %}
 <h2>AI-Generated Comments</h2>
@@ -152,9 +151,8 @@ Copy
 {% endif %}
 {% endraw %}
 Manual AI Content Generation: You can also use the AI content generator script directly:
-bash
 
-Copy
+
 python ai_content_generator.py "Your Blog Post Title"
 This will generate a blog post and comments based on the given title.
 Next Steps
@@ -166,7 +164,7 @@ Commit and push changes to GitHub to trigger deployment on Netlify.
 Experiment with different AI prompts by modifying the ai_content_generator.py script.
 Project Structure After Setup
 
-Copy
+
 my-blog/
 ├── _posts/
 ├── _site/
@@ -202,9 +200,6 @@ Writing Blog Posts
 You can create blog posts using the Netlify CMS, manually in the _posts directory, or use the AI content generator for inspiration.
 
 Manual Post Example
-markdown
-
-Copy
 ---
 layout: post
 title: "Your Post Title"
