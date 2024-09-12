@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Building an AI-Enhanced Jekyll Blog with Netlify CMS and Docker: A Step-by-Step Guide"
-date: 2024-09-12 09:00:00 -0500
+date:2024-09-11T23:51:46.803Z
 ---
 
 # Building an AI-Enhanced Jekyll Blog with Netlify CMS and Docker: A Step-by-Step Guide
