@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Daniel Kliewer
+title: 
 description: Exploring machine learning and web development
 ---
 
