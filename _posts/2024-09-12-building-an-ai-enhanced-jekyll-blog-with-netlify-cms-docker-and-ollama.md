@@ -259,3 +259,4 @@ By following this guide, you'll have a fully functional Jekyll blog integrated w
   - Explore personalized content recommendations, AI-powered chatbots, voice integration, and multilingual support.
 
 Happy blogging with your new AI-enhanced Jekyll site!
+```
