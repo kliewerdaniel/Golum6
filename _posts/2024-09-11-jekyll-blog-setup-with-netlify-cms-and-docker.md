@@ -2,8 +2,6 @@
 layout: post
 title: Jekyll Blog Setup with Netlify CMS and Docker
 date: 2024-09-11T23:51:46.803Z
-categories: [tutorial, web development]
-tags: [jekyll, netlify, docker, cms]
 ---
 
 # Jekyll Blog Setup with Netlify CMS and Docker
