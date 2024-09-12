@@ -25,6 +25,7 @@ Install these on Unix-based systems (Linux, macOS) using:
 # Install Git
 
 sudo apt-get update
+
 sudo apt-get install git
 
 # Install Docker and Docker Compose
@@ -34,7 +35,9 @@ Follow the official Docker documentation for your specific OS
 # Install Ruby (using rbenv)
 
 sudo apt-get install rbenv
+
 rbenv install 3.0.0
+
 rbenv global 3.0.0
 
 # Install Bundler and Jekyll
@@ -48,11 +51,13 @@ sudo apt-get install nodejs npm
 # Install Netlify CLI
 
 npm install netlify-cli -g
-Getting Started
+
+# Getting Started
 
 # Clone the repository:
 
 git clone https://github.com/kliewerdaniel/golum2.git
+
 cd golum3
 
 # Make the setup script executable:
@@ -66,11 +71,17 @@ chmod +x golum.sh
 # Follow the prompts in the script. It will:
 
 Create a new Jekyll site
+
 Set up Git
+
 Create a Dockerfile and docker-compose.yml
+
 Set up Netlify CMS
+
 Build and run the Docker container
+
 Initialize Netlify
+
 Push to GitHub (you'll need to provide your GitHub repository URL)
 
 
@@ -79,21 +90,29 @@ After the script completes, your blog will be running locally and set up for Net
 # Next Steps
 
 Visit http://localhost:4000 to view your blog locally.
+
 Use the Netlify CMS at http://localhost:4000/admin to manage content.
+
 Edit files directly in your preferred code editor.
+
 Commit and push changes to trigger Netlify deployment.
 
 # Customization
 
 Modify _config.yml to change your blog's settings.
+
 Edit or add templates in the _layouts and _includes directories.
+
 Customize styles in the assets/css directory.
 
 # Troubleshooting
+
 If you encounter issues:
 
 Ensure all prerequisites are correctly installed.
+
 Check that your local Ruby version matches the one specified in .ruby-version (3.0.0).
+
 Verify that the Bundler version in Gemfile.lock is compatible with Ruby 3.0.0.
 
 # Folder Structure
@@ -132,6 +151,7 @@ Rebuild the container after changes: docker-compose up -d --build
 1. Using Netlify CMS:
 
 Navigate to http://localhost:4000/admin
+
 Log in and use the interface to create or edit posts
 
 2. Manually:
