@@ -1,0 +1,6 @@
+{% if page.ai_comments %}
+<h2>AI-Generated Comments</h2>
+<div class="ai-comments">
+  {{ page.ai_comments | markdownify }}
+</div>
+{% endif %}
