@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Building an AI-Enhanced Jekyll Blog with Netlify CMS, Docker, and Ollama"
+title: Building an AI-Enhanced Jekyll Blog with Netlify CMS, Docker, and Ollama
 date: 2024-09-11T23:51:46.803Z
 ----
 # Building an AI-Enhanced Jekyll Blog with Netlify CMS, Docker, and Ollama
