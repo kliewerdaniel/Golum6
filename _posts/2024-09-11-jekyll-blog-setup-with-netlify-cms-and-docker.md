@@ -60,7 +60,9 @@ git clone https://github.com/kliewerdaniel/golum2.git
 
 In it is golum.sh, the .sh file I created to set up the blog:
 
-```bash
+```
+bash
+
 #!/bin/bash
 
 # Jekyll Blog Setup Script
