@@ -273,6 +273,6 @@ For additional resources:
 - [Jekyll Documentation](https://jekyllrb.com/docs/)
 - [Netlify CMS Documentation](https://www.netlifycms.org/docs/)
 - [Docker Documentation](https://docs.docker.com/)
-```
+
 
 This formatting will improve the structure and readability when rendered on your website, making it easier for users to follow along.
