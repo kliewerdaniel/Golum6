@@ -186,7 +186,7 @@ Before we begin, ensure you have the following installed:
      {{ page.ai_comments | markdownify }}
    </div>
    {% endif %}
-   { endraw }
+   {% endraw %}
    ```
 
 ## Step 5: Configure for Netlify Deployment
