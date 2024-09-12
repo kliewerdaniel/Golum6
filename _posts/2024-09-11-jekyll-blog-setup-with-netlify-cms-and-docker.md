@@ -22,40 +22,48 @@ Ensure you have the following installed:
 
 Install these on Unix-based systems (Linux, macOS) using:
 
-```bash
 # Install Git
+
 sudo apt-get update
 sudo apt-get install git
 
 # Install Docker and Docker Compose
-# Follow the official Docker documentation for your specific OS
+
+ollow the official Docker documentation for your specific OS
 
 # Install Ruby (using rbenv)
+
 sudo apt-get install rbenv
 rbenv install 3.0.0
 rbenv global 3.0.0
 
 # Install Bundler and Jekyll
+
 gem install bundler jekyll
 
 # Install Node.js and npm
+
 sudo apt-get install nodejs npm
 
 # Install Netlify CLI
+
 npm install netlify-cli -g
 Getting Started
 
-Clone the repository:
-Copygit clone https://github.com/kliewerdaniel/golum2.git
+# Clone the repository:
+
+git clone https://github.com/kliewerdaniel/golum2.git
 cd golum3
 
-Make the setup script executable:
-Copychmod +x golum.sh
+# Make the setup script executable:
 
-Run the setup script:
-Copy./golum.sh
+chmod +x golum.sh
 
-Follow the prompts in the script. It will:
+# Run the setup script:
+
+./golum.sh
+
+# Follow the prompts in the script. It will:
 
 Create a new Jekyll site
 Set up Git
@@ -68,29 +76,31 @@ Push to GitHub (you'll need to provide your GitHub repository URL)
 
 After the script completes, your blog will be running locally and set up for Netlify deployment.
 
-Next Steps
+# Next Steps
 
 Visit http://localhost:4000 to view your blog locally.
 Use the Netlify CMS at http://localhost:4000/admin to manage content.
 Edit files directly in your preferred code editor.
 Commit and push changes to trigger Netlify deployment.
 
-Customization
+# Customization
 
 Modify _config.yml to change your blog's settings.
 Edit or add templates in the _layouts and _includes directories.
 Customize styles in the assets/css directory.
 
-Troubleshooting
+# Troubleshooting
 If you encounter issues:
 
 Ensure all prerequisites are correctly installed.
 Check that your local Ruby version matches the one specified in .ruby-version (3.0.0).
 Verify that the Bundler version in Gemfile.lock is compatible with Ruby 3.0.0.
 
-Folder Structure
+# Folder Structure
+
 After running the setup script, your project structure should look like this:
-Copymy-blog/
+
+my-blog/
 ├── _posts/
 ├── _site/
 ├── admin/
@@ -104,15 +114,20 @@ Copymy-blog/
 ├── Gemfile
 ├── Gemfile.lock
 └── .ruby-version
-Using Docker
+
+# Using Docker
+
 Useful Docker commands:
 
 Start the container: docker-compose up -d
+
 Stop the container: docker-compose down
+
 View logs: docker-compose logs -f
+
 Rebuild the container after changes: docker-compose up -d --build
 
-Writing Blog Posts
+# Writing Blog Posts
 
 1. Using Netlify CMS:
 
