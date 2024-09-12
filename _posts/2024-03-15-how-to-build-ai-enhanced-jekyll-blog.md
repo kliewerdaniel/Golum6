@@ -179,12 +179,12 @@ Before we begin, ensure you have the following installed:
 4. Update your post layout to display AI-generated comments. In `_layouts/post.html`, add:
 
    ```html
-   % if page.ai_comments %}
+   {% if page.ai_comments %}
    <h2>AI-Generated Comments</h2>
    <div class="ai-comments">
      {{ page.ai_comments | markdownify }}
    </div>
-   {% endif %
+   {% endif %}
    ```
 
 ## Step 5: Configure for Netlify Deployment
