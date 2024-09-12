@@ -29,7 +29,7 @@ sudo apt-get install git
 
 # Install Docker and Docker Compose
 
-ollow the official Docker documentation for your specific OS
+Follow the official Docker documentation for your specific OS
 
 # Install Ruby (using rbenv)
 
