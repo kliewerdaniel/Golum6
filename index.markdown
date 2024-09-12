@@ -3,7 +3,14 @@ layout: home
 title: Welcome to My Tech Blog
 description: Exploring the frontiers of technology and innovation
 ---
-
+<header>
+  <div class="site-title">
+    <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+  </div>
+  <nav>
+    <!-- existing navigation -->
+  </nav>
+</header>
 # Welcome to the Future of Tech
 
 Hello, tech enthusiasts and curious minds! 👋 You've just stumbled upon a digital oasis of cutting-edge technology, innovative ideas, and thought-provoking discussions.
@@ -56,3 +63,44 @@ Hi, I'm Daniel Kliewer, a tech enthusiast with a passion for machine learning. W
     });
   }
 </script>
+
+{% if site.google_analytics %}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '{{ site.google_analytics }}', 'auto');
+  ga('send', 'pageview');
+</script>
+{% endif %}
+
+<div class="search-container">
+  <form action="/search" method="get">
+    <input type="text" name="q" placeholder="Search...">
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+<footer>
+  <!-- existing footer content -->
+  <div class="social-links">
+    <a href="#" target="_blank">Twitter</a>
+    <a href="#" target="_blank">LinkedIn</a>
+    <a href="#" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+{% if page.custom_css %}
+  {% for stylesheet in page.custom_css %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{ stylesheet }}.css">
+  {% endfor %}
+{% endif %}
+
+<meta property="og:title" content="{{ page.title }}">
+<meta property="og:description" content="{{ page.description | default: site.description }}">
+<meta property="og:image" content="{{ page.image | default: site.default_image }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+
+<link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url }}" type="image/x-icon">
