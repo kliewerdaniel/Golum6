@@ -12,4 +12,6 @@ collections:
       - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "AI Content", name: "ai_content", widget: "ai-content"}
       - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "AI Comments", name: "ai_comments", widget: "text"}
