@@ -6,86 +6,85 @@ date: 2024-09-11T23:51:46.803Z
 
 # Jekyll Blog Setup with Netlify CMS and Docker
 
-This guide provides instructions for setting up a Jekyll blog with Netlify CMS, Docker, and Netlify deployment.
+This guide provides step-by-step instructions to set up a Jekyll blog using Netlify CMS, Docker, and Netlify for deployment.
+
+---
 
 ## Prerequisites
 
-Ensure you have the following installed:
+Make sure you have the following installed on your system:
 
-1. Git
-2. Docker and Docker Compose
-3. Ruby (version 3.0.0 or later)
-4. Bundler
-5. Jekyll
-6. Node.js and npm
-7. Netlify CLI
+- **Git**
+- **Docker** and **Docker Compose**
+- **Ruby** (version 3.0.0 or later)
+- **Bundler**
+- **Jekyll**
+- **Node.js** and **npm**
+- **Netlify CLI**
 
-Install these on Unix-based systems (Linux, macOS) using:
-
-## Install Git
-
+### Install Git
+```bash
 sudo apt-get update
-
 sudo apt-get install git
-
-## Install Docker and Docker Compose
-
-Follow the official Docker documentation for your specific OS
-
-## Install Ruby (using rbenv)
-
-sudo apt-get install rbenv
-
-rbenv install 3.0.0
-
-rbenv global 3.0.0
-
-## Install Bundler and Jekyll
-
-gem install bundler jekyll
-
-## Install Node.js and npm
-
-sudo apt-get install nodejs npm
-
-## Install Netlify CLI
-
-npm install netlify-cli -g
-
-# Getting Started
-
-## Clone the repository:
-
-git clone https://github.com/kliewerdaniel/golum2.git
-
-In it is golum.sh, the .sh file I created to set up the blog:
-
-Beginning of golum.sh :
-
-
-
 ```
+
+### Install Docker and Docker Compose
+Follow the official Docker documentation for your OS.
+
+### Install Ruby using `rbenv`
+```bash
+sudo apt-get install rbenv
+rbenv install 3.0.0
+rbenv global 3.0.0
+```
+
+### Install Bundler and Jekyll
+```bash
+gem install bundler jekyll
+```
+
+### Install Node.js and npm
+```bash
+sudo apt-get install nodejs npm
+```
+
+### Install Netlify CLI
+```bash
+npm install netlify-cli -g
+```
+
+---
+
+## Getting Started
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/kliewerdaniel/golum2.git
+```
+
+The repository contains `golum.sh`, a script to set up the blog.
+
+### Beginning of `golum.sh`:
+
+```bash
 #!/bin/bash
 
 # Jekyll Blog Setup Script
 
 set -e
-
 echo "Setting up your Jekyll blog with headless CMS, Docker, and Netlify..."
 
 # Step 1: Create a new Jekyll site
-echo "Creating new Jekyll site..."
 jekyll new golum3
 cd golum3
 
 # Step 2: Set up Git repository
-echo "Initializing Git repository..."
 git init
 git add .
 git commit -m "Initial commit"
 
 # Step 3: Create Dockerfile
-echo "Creating Dockerfile..."
 cat << EOF > Dockerfile
 FROM jekyll/jekyll:4.2.0
 WORKDIR /srv/jekyll
@@ -95,7 +94,6 @@ CMD ["jekyll", "serve", "--force_polling", "-H", "0.0.0.0"]
 EOF
 
 # Step 4: Create docker-compose.yml
-echo "Creating docker-compose.yml..."
 cat << EOF > docker-compose.yml
 version: '3'
 services:
@@ -109,7 +107,6 @@ services:
 EOF
 
 # Step 5: Set up Netlify CMS
-echo "Setting up Netlify CMS..."
 mkdir -p admin
 cat << EOF > admin/config.yml
 backend:
@@ -142,98 +139,43 @@ cat << EOF > admin/index.html
 </body>
 </html>
 EOF
-
-# Step 6: Create .ruby-version file
-echo "Creating .ruby-version file..."
-echo "3.0.0" > .ruby-version
-
-# Step 8: Build and run Docker container
-echo "Building and running Docker container..."
-docker-compose up -d
-
-# Step 9: Netlify setup
-echo "Setting up Netlify..."
-netlify init
-
-# Step 10: Push to GitHub (assumes you've created a repo)
-echo "Please enter your GitHub repository URL:"
-read repo_url
-git remote add origin $repo_url
-git push -u origin main
-
-echo "Setup complete! Your blog is now running locally and set up for Netlify deployment."
-echo "Next steps:"
-echo "1. Visit http://localhost:4000 to view your blog locally."
-echo "2. Use the Netlify CMS at http://localhost:4000/admin to manage content."
-echo "3. Edit files directly in your preferred code editor."
-echo "4. Commit and push changes to trigger Netlify deployment."
-
 ```
 
-End of golum.sh
+---
 
+## Running the Setup Script
+
+After cloning the repository, navigate to the directory and make the script executable:
+
+```bash
 cd golum3
-
-## Make the setup script executable:
-
 chmod +x golum.sh
-
-## Run the setup script:
-
 ./golum.sh
+```
 
-## Follow the prompts in the script. 
+### The Script Will:
 
-#### It will:
+1. Create a new Jekyll site
+2. Set up Git
+3. Create a Dockerfile and docker-compose.yml
+4. Set up Netlify CMS
+5. Build and run the Docker container
+6. Initialize Netlify
+7. Push your code to GitHub
 
-Create a new Jekyll site
+---
 
-Set up Git
+## Next Steps
 
-Create a Dockerfile and docker-compose.yml
+Once the setup is complete, you can:
 
-Set up Netlify CMS
+- Visit `http://localhost:4000` to view your blog locally.
+- Use the Netlify CMS at `http://localhost:4000/admin` to manage content.
+- Commit and push changes to GitHub to trigger deployment on Netlify.
 
-Build and run the Docker container
+### Project Structure After Setup
 
-Initialize Netlify
-
-Push to GitHub (you'll need to provide your GitHub repository URL)
-
-After the script completes, your blog will be running locally and set up for Netlify deployment.
-
-# Next Steps
-
-Visit http://localhost:4000 to view your blog locally.
-
-Use the Netlify CMS at http://localhost:4000/admin to manage content.
-
-Edit files directly in your preferred code editor.
-
-Commit and push changes to trigger Netlify deployment.
-
-## Customization
-
-Modify _config.yml to change your blog's settings.
-
-Edit or add templates in the _layouts and _includes directories.
-
-Customize styles in the assets/css directory.
-
-# Troubleshooting
-
-If you encounter issues:
-
-Ensure all prerequisites are correctly installed.
-
-Check that your local Ruby version matches the one specified in .ruby-version (3.0.0).
-
-Verify that the Bundler version in Gemfile.lock is compatible with Ruby 3.0.0.
-
-# Folder Structure
-
-After running the setup script, your project structure should look like this:
-
+```bash
 my-blog/
 ├── _posts/
 ├── _site/
@@ -248,102 +190,61 @@ my-blog/
 ├── Gemfile
 ├── Gemfile.lock
 └── .ruby-version
+```
 
-# Using Docker
+---
 
-Useful Docker commands:
+## Customization
 
-Start the container: docker-compose up -d
+- Modify `_config.yml` for basic settings.
+- Edit or add templates in the `_layouts` and `_includes` directories.
+- Customize styles in the `assets/css` directory.
 
-Stop the container: docker-compose down
+---
 
-View logs: docker-compose logs -f
+## Troubleshooting
 
-Rebuild the container after changes: docker-compose up -d --build
+- Ensure all prerequisites are correctly installed.
+- Confirm the local Ruby version matches `.ruby-version` (3.0.0).
+- Verify the Bundler version is compatible with Ruby 3.0.0.
 
-# Writing Blog Posts
-
-1. Using Netlify CMS:
-
-Navigate to http://localhost:4000/admin
-
-Log in and use the interface to create or edit posts
-
-2. Manually:
-
-   * Create a new file in the `_posts` directory
-   * Name it `YYYY-MM-DD-title.md`
-   * Add front matter at the top of the file:
-
-     ```yaml
-     ---
-     layout: post
-     title: "Your Post Title"
-     date: YYYY-MM-DD HH:MM:SS +/-TTTT
-     categories: [category1, category2]
-     ---
-     ```
-   * Write your post content in Markdown below the front matter
+---
 
 ## Deployment
 
-This setup uses Netlify for deployment:
+1. Push changes to your GitHub repository.
+2. Netlify will automatically detect changes and trigger a new build.
+3. Once the build is complete, Netlify will deploy your site.
 
-1. Push changes to your GitHub repository
-2. Netlify automatically detects the push and starts a new build
-3. Once the build is complete, Netlify deploys your site
+---
 
-To view your deployment settings or trigger a manual deploy:
+## Writing Blog Posts
 
-1. Log in to your Netlify account
-2. Select your site
-3. Go to the "Deploys" tab
+You can create blog posts using the Netlify CMS or manually in the `_posts` directory.
 
-## SEO Optimization
+### Manual Post Example
 
-To improve your blog's SEO:
+```yaml
+---
+layout: post
+title: "Your Post Title"
+date: YYYY-MM-DD HH:MM:SS +/-TTTT
+categories: [category1, category2]
+---
+Your post content in Markdown goes here.
+```
 
-1. Edit `_config.yml` and fill in the `title`, `description`, and `author` fields
-2. Consider installing the `jekyll-seo-tag` plugin
-3. Use descriptive titles and fill out front matter for each post
-4. Use headings (H1, H2, etc.) appropriately in your content
+---
 
-## Performance Optimization
+## Conclusion
 
-To ensure your blog loads quickly:
+By following this guide, you’ll have a fully functional Jekyll blog integrated with Netlify CMS, Docker, and Netlify deployment.
 
-1. Optimize images before uploading
-2. Minimize use of external scripts and stylesheets
-3. Consider using a CDN for assets
-4. Enable Netlify's asset optimization features in your Netlify dashboard
+For additional resources:
 
-## Backing Up Your Blog
+- [Jekyll Documentation](https://jekyllrb.com/docs/)
+- [Netlify CMS Documentation](https://www.netlifycms.org/docs/)
+- [Docker Documentation](https://docs.docker.com/)
+```
 
-While Git serves as a form of backup, consider these additional steps:
-
-1. Regularly push changes to GitHub
-2. Set up a secondary remote repository as a backup
-3. Periodically download a local copy of your entire repository
-
-## Getting Help
-
-If you encounter any issues or have questions:
-
-1. Check the [Jekyll documentation](https://jekyllrb.com/docs/)
-2. Visit the [Netlify CMS community forum](https://community.netlify.com/c/netlify-cms/13)
-3. Search for similar issues on Stack Overflow
-4. Open an issue in this GitHub repository
-
-Remember, the Jekyll and web development communities are generally friendly and helpful. Don't hesitate to ask for help when you need it!
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is open source and available under the MIT License.
-
-- - -
-
-By following this guide, you should have a fully functional Jekyll blog set up with Netlify CMS, Docker, and Netlify deployment. Happy blogging!
+This formatting will improve the structure and readability when rendered on your website, making it easier for users to follow along.
