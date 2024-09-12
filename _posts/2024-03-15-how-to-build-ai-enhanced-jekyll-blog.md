@@ -172,12 +172,11 @@ my-blog/
 You can create blog posts using the Netlify CMS, manually in the `_posts` directory, or use the AI content generator for inspiration.
 ### Manual Post Example
 ```markdown
----
+
 layout: post
 title: "Your Post Title"
 date: YYYY-MM-DD HH:MM:SS +/-TTTT
-categories: [category1, category2]
----
+
 Your post content in Markdown goes here.
 ```
 ## Conclusion
