@@ -60,7 +60,7 @@ git clone https://github.com/kliewerdaniel/golum2.git
 
 In it is golum.sh, the .sh file I created to set up the blog:
 
-<code>
+```bash
 #!/bin/bash
 
 # Jekyll Blog Setup Script
@@ -163,7 +163,7 @@ echo "1. Visit http://localhost:4000 to view your blog locally."
 echo "2. Use the Netlify CMS at http://localhost:4000/admin to manage content."
 echo "3. Edit files directly in your preferred code editor."
 echo "4. Commit and push changes to trigger Netlify deployment."
-</code>
+'''
 
 cd golum3
 
