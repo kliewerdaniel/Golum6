@@ -71,8 +71,7 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_tag('ai_search', Jekyll::AISearch)
-```
+
 
 ### Step 3: Use the New Tag in Your Posts
 
