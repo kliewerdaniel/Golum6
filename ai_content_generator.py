@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-import flask
-=======
->>>>>>> parent of 033c4d1 (dfsa)
-from flask import Flask, request, jsonify
-=======
->>>>>>> parent of 3d81fb4 (afds)
-=======
->>>>>>> parent of 3d81fb4 (afds)
-=======
->>>>>>> parent of 3d81fb4 (afds)
-=======
->>>>>>> parent of 3d81fb4 (afds)
 import subprocess
 import sys
 
