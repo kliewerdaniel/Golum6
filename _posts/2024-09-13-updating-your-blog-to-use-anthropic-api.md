@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Updating Your Jekyll Blog to Use Anthropic API
-date: 2024-09-13T23:51:46.803Z
+date: 2024-09-13T11:51:00.000Z
 ---
 '''# Updating Your Jekyll Blog to Use Anthropic API
 ## 1. Install Required Python Packages
