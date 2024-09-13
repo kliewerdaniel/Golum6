@@ -4,8 +4,6 @@ title: Jekyll Blog Setup with Netlify CMS and Docker
 date: 2024-09-11T23:51:46.803Z
 ---
 
-# Jekyll Blog Setup with Netlify CMS and Docker
-
 This guide provides step-by-step instructions to set up a Jekyll blog using Netlify CMS, Docker, and Netlify for deployment.
 
 ---

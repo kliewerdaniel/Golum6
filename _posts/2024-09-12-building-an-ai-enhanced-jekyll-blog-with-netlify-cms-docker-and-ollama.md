@@ -3,8 +3,6 @@ layout: home
 title: Building an AI-Enhanced Jekyll Blog with Netlify CMS, Docker, and Ollama
 date: 2024-09-12T15:26:46.465Z
 ---
-# Guide to Set Up a Jekyll Blog with Netlify CMS, Docker, Netlify, and Ollama for AI-Enhanced Content Generation
-
 ## Prerequisites
 Make sure you have the following installed on your system:
 - Git
