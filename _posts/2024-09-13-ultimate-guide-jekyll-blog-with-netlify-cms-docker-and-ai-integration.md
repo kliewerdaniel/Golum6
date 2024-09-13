@@ -400,7 +400,7 @@ jobs:
 To display the new AI-generated content, you'll need to update your Jekyll templates:
 
 1. Update your post layout (`_layouts/post.html`):
-
+<!--
 ```html
 ---
 layout: default
@@ -442,7 +442,7 @@ layout: default
   {% endif %}
 </article>
 ```
-
+-->
 ### Step 11: Optimize Performance
 
 To address potential performance issues with running AI models locally:
