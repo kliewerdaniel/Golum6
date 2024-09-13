@@ -1,40 +1,48 @@
+In this post, I'll outline a web app concept based on the system prompt, designed to work with a locally run Ollama installation and Netlify for static deployment. This app will allow users to generate content locally and easily push updates to their AI-enhanced Jekyll blog.
+
+## Introducing "OllamaJekyllPublisher"
+
+The concept of this app is simple: a local web interface that lets you generate AI-enhanced blog posts using your local Ollama setup, and automatically push the generated content to a Jekyll blog hosted on Netlify.
+
+### Local Setup:
+
+1. A Jekyll blog with AI-enhancement features already set up (as described in the system prompt).
+2. Ollama installed locally.
+3. A Python script to interface with Ollama and generate content.
+
 ---
-layout: post
-title: A Web App for AI-Enhanced Jekyll Blog Posts
-date: 2024-09-13T17:28:00.822Z
+
+## Web App Features:
+
+### a. Content Generation Interface:
+- A simple web interface (HTML, CSS, JavaScript) that runs locally.
+- Forms for inputting blog post details (title, tags, initial content).
+- Buttons to trigger AI-enhanced content generation (comments, FAQs, summaries, etc.).
+
+### b. Ollama Integration:
+- Use the local Ollama installation to generate content.
+- Python backend to handle requests from the web interface to Ollama.
+
+### c. Preview and Edit:
+- Display generated content for user review.
+- Allow users to edit or regenerate AI content before publishing.
+
+### d. Git Integration:
+- Automatically commit changes to the local Git repository.
+- Push changes to the remote repository (which triggers Netlify deployment).
+
+### e. Netlify Deploy Status:
+- Show the status of the Netlify deployment.
+
 ---
-In this post, we outline a web app concept called OllamaJekyllPublisher, designed to work with a locally installed Ollama model and Netlify for static deployment. This app allows users to generate content locally, review it, and seamlessly push updates to their AI-enhanced Jekyll blog.
 
-Concept Overview
-The OllamaJekyllPublisher is a web-based tool that interfaces with your local Ollama AI installation to help generate content for your Jekyll blog. Here’s how the system is structured:
+## Implementation Steps:
 
-Local Setup
-Jekyll Blog: The blog is enhanced with AI features to make content generation smoother and more efficient.
-Ollama Installation: Ollama runs locally to generate AI content.
-Python Script: A Python script interfaces with Ollama, generating AI-driven content based on prompts.
-Web App Features
-1. Content Generation Interface
-A simple web interface allows users to input blog details such as the title, tags, and initial content. Once submitted, AI-generated content like comments, FAQs, and summaries are created.
+### Step 1: Create the Local Web Interface
 
-2. Ollama Integration
-The Python backend sends requests from the web interface to the local Ollama installation, which generates the AI-driven content.
+#### `index.html`
 
-3. Content Preview and Editing
-Users can review the generated content and edit it before publishing.
-
-4. Git Integration
-The app automatically commits changes to the local Git repository and pushes updates to the remote repository, triggering a Netlify deployment.
-
-5. Netlify Deploy Status
-A real-time status of the Netlify deployment is shown to the user.
-
-Implementation Steps
-Step 1: Create the Local Web Interface
-This HTML/CSS/JavaScript frontend provides a simple interface for users to generate, preview, and publish AI-enhanced blog content.
-
-html
-Copy code
-<!-- index.html -->
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,9 +70,10 @@ Copy code
     <script src="app.js"></script>
 </body>
 </html>
-css
-Copy code
-/* style.css */
+'''
+style.css
+
+'''css
 body {
     font-family: Arial, sans-serif;
     max-width: 800px;
@@ -91,9 +100,9 @@ button {
     border: 1px solid #ccc;
     padding: 10px;
 }
-javascript
-Copy code
-// app.js
+'''
+app.js
+'''javascript
 document.getElementById('postForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const title = document.getElementById('title').value;
@@ -112,14 +121,45 @@ document.getElementById('postForm').addEventListener('submit', async (e) => {
     document.getElementById('aiSummary').innerHTML = aiContent.summary;
     document.getElementById('aiContent').style.display = 'block';
 });
-Step 2: Create the Python Backend
-The backend interfaces with the local Ollama installation and manages Git operations.
 
-python
-Copy code
-# app.py
+document.getElementById('publishButton').addEventListener('click', async () => {
+    const response = await fetch('/publish', { method: 'POST' });
+    const result = await response.json();
+    if (result.success) {
+        alert('Post published and pushed to GitHub!');
+        checkDeployStatus();
+    } else {
+        alert('Error publishing post: ' + result.error);
+    }
+});
+
+async function checkDeployStatus() {
+    const statusElement = document.getElementById('deployStatus');
+    statusElement.innerHTML = 'Checking deploy status...';
+
+    const checkStatus = async () => {
+        const response = await fetch('/deploy-status');
+        const status = await response.json();
+        if (status.deployed) {
+            statusElement.innerHTML = 'Deploy successful!';
+        } else if (status.error) {
+            statusElement.innerHTML = 'Deploy failed: ' + status.error;
+        } else {
+            statusElement.innerHTML = 'Deploying...';
+            setTimeout(checkStatus, 5000);
+        }
+    };
+
+    checkStatus();
+}
+'''
+Step 2: Create the Python Backend
+app.py
+'''python
+
 from flask import Flask, request, jsonify
 import subprocess
+import os
 import git
 from netlify_deploy_status import check_netlify_status
 
@@ -136,9 +176,9 @@ def generate_content():
     tags = data['tags']
     content = data['content']
 
-    comments = generate_ollama_content(f"Generate comments for: {title}\n{content}")
-    faq = generate_ollama_content(f"Generate FAQ for: {title}\n{content}")
-    summary = generate_ollama_content(f"Summarize: {title}\n{content}")
+    comments = generate_ollama_content(f"Generate comments for blog post: {title}\n{content}")
+    faq = generate_ollama_content(f"Generate FAQ for blog post: {title}\n{content}")
+    summary = generate_ollama_content(f"Summarize blog post: {title}\n{content}")
 
     return jsonify({
         'comments': comments,
@@ -148,12 +188,17 @@ def generate_content():
 
 @app.route('/publish', methods=['POST'])
 def publish_post():
-    repo = git.Repo('.')
-    repo.git.add('.')
-    repo.git.commit('-m', 'New blog post')
-    repo.git.push()
+    try:
+        create_post_file()
 
-    return jsonify({'success': True})
+        repo = git.Repo('.')
+        repo.git.add('.')
+        repo.git.commit('-m', 'Add new blog post')
+        repo.git.push()
+
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/deploy-status')
 def deploy_status():
@@ -162,55 +207,47 @@ def deploy_status():
 def generate_ollama_content(prompt):
     result = subprocess.run(['ollama', 'run', 'mistral', prompt], capture_output=True, text=True)
     return result.stdout
-Step 3: Check Netlify Deploy Status
-python
-Copy code
-# netlify_deploy_status.py
+
+def create_post_file():
+    pass
+
+if __name__ == '__main__':
+    app.run(debug=True)
+ '''
+
+ Step 3: Checking Netlify Deploy Status
+Create a script to check the status of Netlify deployment:
+
+netlify_deploy_status.py
+'''python
+
 import requests
 import os
 
 def check_netlify_status():
-    site_id = os.getenv('NETLIFY_SITE_ID')
-    token = os.getenv('NETLIFY_ACCESS_TOKEN')
+    site_id = os.environ.get('NETLIFY_SITE_ID')
+    token = os.environ.get('NETLIFY_ACCESS_TOKEN')
+
+    if not site_id or not token:
+        return {'error': 'Netlify credentials not set'}
 
     headers = {'Authorization': f'Bearer {token}'}
     response = requests.get(f'https://api.netlify.com/api/v1/sites/{site_id}/deploys', headers=headers)
 
-    latest_deploy = response.json()[0]
+    if response.status_code != 200:
+        return {'error': 'Failed to fetch deploy status'}
+
+    deploys = response.json()
+    if not deploys:
+        return {'error': 'No deploys found'}
+
+    latest_deploy = deploys[0]
     if latest_deploy['state'] == 'ready':
         return {'deployed': True}
     elif latest_deploy['state'] == 'error':
         return {'error': 'Deploy failed'}
-    return {'deployed': False}
-Step 4: Jekyll Layout for AI-Enhanced Posts
-html
-Copy code
-<!-- _layouts/ai_enhanced_post.html -->
----
-layout: post
----
-{{ content }}
-
-{% if page.ai_comments %}
-<h2>AI-Generated Comments</h2>
-{{ page.ai_comments | markdownify }}
-{% endif %}
-
-{% if page.ai_faq %}
-<h2>AI-Generated FAQs</h2>
-{{ page.ai_faq | markdownify }}
-{% endif %}
-
-{% if page.ai_summary %}
-<h2>AI-Generated Summary</h2>
-{{ page.ai_summary | markdownify }}
-{% endif %}
-Final Thoughts
-This setup enables you to easily create, edit, and publish AI-enhanced blog posts to your Jekyll site, which can be automatically deployed through Netlify. It leverages local AI models (Ollama) while maintaining the simplicity of a static Jekyll site.
-
-For further reading:
-
-Explore Flask documentation to expand on the backend capabilities.
-Read up on Jekyll’s official docs for advanced static site features.
-Check out research papers on AI content generation to stay updated with the latest advancements.
-Feel free to experiment with different models or modify the prompts to suit your content creation needs!
+    else:
+        return {'deployed': False}
+        '''
+Conclusion
+With this setup, users can now easily create AI-enhanced blog posts and update their Jekyll site hosted on Netlify, all from a local web interface. This system combines the power of local AI generation with static site deployment, streamlining the process of publishing high-quality, AI-enhanced content.
