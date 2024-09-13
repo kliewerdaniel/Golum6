@@ -76,7 +76,7 @@ Liquid::Template.register_tag('ai_search', Jekyll::AISearch)
 
 ### Step 3: Use the New Tag in Your Posts
 
-To use the <!--  `ai_search` --> tag in your posts, simply include it in your Markdown files like this:
+To use the tag in your posts, simply include it in your Markdown files like this:
 
 ## Example Usage
 
