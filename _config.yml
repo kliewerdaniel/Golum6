@@ -31,7 +31,10 @@ github_username:  kliewerdaniel
 theme: minima
 plugins:
   - jekyll-feed
+<<<<<<< HEAD
   - jekyll-admin
+=======
+>>>>>>> parent of 033c4d1 (dfsa)
 
 # Exclude from processing.
 # The following items will not be processed, by default.
