@@ -3,37 +3,11 @@
     <article class="post">
         <h1>{{ page.title }}</h1>
         
-        {% if page.summary %}
-          <div class="summary">
-            <h2>Summary</h2>
-            <p>{{ page.summary }}</p>
-          </div>
-        {% endif %}
       
         <div class="post-content">
           {{ content }}
         </div>
       
-        {% if page.recommendations %}
-          <div class="recommendations">
-            <h2>Recommended Posts</h2>
-            <ul>
-              {% for recommendation in page.recommendations %}
-                <li><a href="{{ site.baseurl }}{% post_url recommendation %}">{{ recommendation }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endif %}
-      
-        {% if page.comments %}
-          <div class="comments">
-            <h2>Comments</h2>
-            {% for comment in page.comments %}
-              <div class="comment">
-                <p><strong>{{ comment.persona }}</strong>: {{ comment.content }}</p>
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
+
       </article>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
