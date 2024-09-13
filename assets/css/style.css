@@ -8,28 +8,57 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+    color: #000;
+    background: linear-gradient(to bottom, #fff, #f0f0f0);
+    min-height: 100vh;
+}
+
+/* Header styles */
+header {
+    background: linear-gradient(to bottom, #000, #333);
+    padding: 1rem 0;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+}
+
+nav ul li a:hover {
+    opacity: 0.7;
 }
 
 /* Main content styles */
 main {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 2rem auto;
     padding: 2rem;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 
 .content {
-    padding: 2rem 0;
+    padding: 1rem 0;
 }
 
 h1 {
     font-size: 2.5rem;
-    color: #2c3e50;
+    color: #000;
     margin-bottom: 1.5rem;
-    border-bottom: 2px solid #3498db;
+    border-bottom: 2px solid #000;
     padding-bottom: 0.5rem;
 }
 
@@ -44,13 +73,14 @@ p {
 
 /* Link styles */
 a {
-    color: #3498db;
+    color: #000;
     text-decoration: none;
-    transition: color 0.3s ease;
+    border-bottom: 1px solid #000;
+    transition: border-color 0.3s ease;
 }
 
 a:hover {
-    color: #2980b9;
+    border-color: #666;
 }
 
 /* List styles */
@@ -63,8 +93,8 @@ ul, ol {
 footer {
     text-align: center;
     padding: 1rem;
-    background-color: #2c3e50;
-    color: #ecf0f1;
+    background: linear-gradient(to top, #000, #333);
+    color: #fff;
     font-size: 0.9rem;
 }
 
@@ -72,9 +102,19 @@ footer {
 @media screen and (max-width: 600px) {
     main {
         padding: 1rem;
+        margin: 1rem;
     }
 
     h1 {
         font-size: 2rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 0.5rem 0;
     }
 }
