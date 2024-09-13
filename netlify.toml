@@ -1,7 +1,6 @@
-
 [build]
-  command = "jekyll build --trace"
-  publish = "_site"
+  command = "jekyll build"
+  publish = "/opt/build/repo/_site"
 
-[build.environment]
-  JEKYLL_ENV = "production"
+[functions]
+  directory = "netlify/functions"
