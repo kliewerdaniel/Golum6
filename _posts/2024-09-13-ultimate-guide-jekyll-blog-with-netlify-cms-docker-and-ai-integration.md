@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ultimate Guide: Jekyll Blog with Netlify CMS, Docker, and AI Integration
+title: Ultimate Guide Jekyll Blog with Netlify CMS, Docker, and AI Integration
 date: 2024-09-13T22:33:28.510Z
 ---
 ## Introduction
@@ -466,5 +466,3 @@ This setup provides a powerful platform for creating engaging, dynamic content w
 Remember to monitor the quality of AI-generated content and make adjustments as needed. The goal is to enhance your blog with AI, not to replace human creativity and insight entirely.
 
 Happy blogging with your new AI-powered Jekyll site!
-
--﻿->
