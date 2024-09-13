@@ -242,7 +242,7 @@ jobs:
 To provide quick overviews of your blog posts, you can use Ollama to generate summaries:
 
 1. Create a new file `generate-summaries.js`:
-<!--
+
 ```javascript
 const ollama = require('./config');
 const fs = require('fs');
@@ -320,7 +320,7 @@ jobs:
 To provide personalized content recommendations, you can use Ollama to analyze post content and suggest related posts:
 
 1. Create a new file `generate-recommendations.js`:
-<!--
+
 ```javascript
 const ollama = require('./config');
 const fs = require('fs');
@@ -360,7 +360,7 @@ async function generateRecommendationsForAllPosts() {
 
 generateRecommendationsForAllPosts();
 ```
--->
+
 2. Update your GitHub Action to include recommendation generation:
 
 ```yaml
@@ -400,7 +400,7 @@ jobs:
 To display the new AI-generated content, you'll need to update your Jekyll templates:
 
 1. Update your post layout (`_layouts/post.html`):
-<!--
+
 ```html
 ---
 layout: default
@@ -442,7 +442,7 @@ layout: default
   {% endif %}
 </article>
 ```
--->
+
 ### Step 11: Optimize Performance
 
 To address potential performance issues with running AI models locally:
