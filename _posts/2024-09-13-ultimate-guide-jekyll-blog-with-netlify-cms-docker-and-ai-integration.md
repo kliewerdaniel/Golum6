@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Ultimate Guide: Jekyll Blog with Netlify CMS, Docker, and AI Integration"
+title: Ultimate Guide: Jekyll Blog with Netlify CMS, Docker, and AI Integration
 date: 2024-09-13T21:01:28.060Z
 ---
 # Ultimate Guide: Jekyll Blog with Netlify CMS, Docker, and AI Integration
