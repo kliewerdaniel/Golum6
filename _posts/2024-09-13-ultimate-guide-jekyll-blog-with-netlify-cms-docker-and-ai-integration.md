@@ -242,7 +242,7 @@ jobs:
 To provide quick overviews of your blog posts, you can use Ollama to generate summaries:
 
 1. Create a new file `generate-summaries.js`:
-
+<﻿!--
 ```javascript
 const ollama = require('./config');
 const fs = require('fs');
@@ -467,4 +467,4 @@ Remember to monitor the quality of AI-generated content and make adjustments as 
 
 Happy blogging with your new AI-powered Jekyll site!
 
-
+-﻿->
