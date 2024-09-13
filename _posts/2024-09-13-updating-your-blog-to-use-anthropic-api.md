@@ -3,7 +3,8 @@ layout: post
 title: Updating Your Jekyll Blog to Use Anthropic API
 date: 2024-09-13T11:51:00.000Z
 ---
-'''# Updating Your Jekyll Blog to Use Anthropic API
+'''markdown 
+# Updating Your Jekyll Blog to Use Anthropic API
 ## 1. Install Required Python Packages
 First, make sure you have the necessary Python packages installed:
 pip install anthropic requests
@@ -367,7 +368,7 @@ Suggested topics (provide only the titles):
 1.
 2.
 3.
-"""
+
 return generate_ai_content(prompt)
 # Add this to your main block
 elif action == "generate_recommendations":
@@ -415,7 +416,6 @@ Relevant post titles (list only the titles):
 1.
 2.
 3.
-"""
 return generate_ai_content(prompt)
 # Add this to your main block
 elif action == "search":
@@ -871,4 +871,4 @@ This AI-enhanced blog not only provides a richer experience for your readers but
 As AI technology evolves, continue to explore new ways to leverage these capabilities to improve your blog and engage your audience. Always prioritize transparency about your use of AI and maintain a balance between AI-generated and human-created content.
 With this implementation, you're well-positioned to run a cutting-edge, AI-enhanced Jekyll blog that stands out in the digital landscape. Happy blogging!
 
-'﻿''
+'''
