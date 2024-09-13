@@ -320,7 +320,7 @@ jobs:
 To provide personalized content recommendations, you can use Ollama to analyze post content and suggest related posts:
 
 1. Create a new file `generate-recommendations.js`:
-
+<!--
 ```javascript
 const ollama = require('./config');
 const fs = require('fs');
@@ -360,7 +360,7 @@ async function generateRecommendationsForAllPosts() {
 
 generateRecommendationsForAllPosts();
 ```
-
+-->
 2. Update your GitHub Action to include recommendation generation:
 
 ```yaml
