@@ -450,7 +450,7 @@ end
 end
 <!--
 Liquid::Template.register_tag('ai_search', Jekyll::AISearch)
-->
+-->
 Now you can use this in your search results page:
 <!-- search.html -->
 <h1>Search Results</h1>
