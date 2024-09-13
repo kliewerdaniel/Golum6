@@ -16,12 +16,4 @@
     {{ content }}
   </div>
 
- 
-  {%- if site.disqus.shortname -%}
-    {%- include disqus_comments.html -%}
-  {%- endif -%}
-
-  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
-</article>
-
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
