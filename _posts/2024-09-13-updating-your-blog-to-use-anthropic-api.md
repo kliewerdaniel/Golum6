@@ -1,10 +1,9 @@
 ---
 layout: post
 title: Updating Your Jekyll Blog to Use Anthropic API
-date: 2024-09-13T03:51:46.803Z
+date: 2024-09-13T23:51:46.803Z
 ---
-'''
-# Updating Your Jekyll Blog to Use Anthropic API
+'''# Updating Your Jekyll Blog to Use Anthropic API
 ## 1. Install Required Python Packages
 First, make sure you have the necessary Python packages installed:
 pip install anthropic requests
@@ -425,9 +424,33 @@ result = ai_powered_search(input_text, posts)
 Certainly! Let's continue with implementing the AI-powered search feature and add some more enhancements to your Jekyll blog.
 ## 22. Implementing an AI-Powered Search Feature (continued)
 Now, let's create a Jekyll plugin to integrate this AI-powered search:
+# _plugins/ai_search.rb
+require 'open3'
+require 'json'
+module Jekyll
+class AISearch < Liquid::Tag
+def initialize(tag_name, text, tokens)
+super
+@query = text.strip
+end
+def render(context)
+site = context.registers[:site]
+posts = site.posts.docs.map { |post| { title: post.data['title'], excerpt: post.data['excerpt'] } }
+command = "python ai_content_generator.py search \"#{@query}\" '#{posts.to_json.gsub("'", "\\'")}'"
+stdout, stderr, status = Open3.capture3(command)
+if status.success?
+results = stdout.strip.split("\n")
+"<ul>" + results.map { |result| "<li>#{result}</li>" }.join + "</ul>"
+else
+Jekyll.logger.error "Error in AI search: #{stderr}"
+"<p>Search failed. Please try again later.</p>"
+end
+end
+end
+end
+Liquid::Template.register_tag('ai_search', Jekyll::AISearch)
 
-
-Now you can use this in your search results page
+Now you can use this in your search results page:
 <!-- search.html -->
 <h1>Search Results</h1>
 <p>You searched for: {{ page.search_term }}</p>
@@ -847,4 +870,4 @@ This AI-enhanced blog not only provides a richer experience for your readers but
 As AI technology evolves, continue to explore new ways to leverage these capabilities to improve your blog and engage your audience. Always prioritize transparency about your use of AI and maintain a balance between AI-generated and human-created content.
 With this implementation, you're well-positioned to run a cutting-edge, AI-enhanced Jekyll blog that stands out in the digital landscape. Happy blogging!
 
-'''
+'﻿''
