@@ -77,7 +77,7 @@ Liquid::Template.register_tag('ai_search', Jekyll::AISearch)
 
 To utilize the `ai_search` tag in your blog posts, insert the tag into your Markdown files:
 
-```markdown
+
 ## Example Post
 
 Here is an example of using the Anthropic API in your post:
