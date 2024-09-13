@@ -1,11 +1,13 @@
+<<<<<<< HEAD
 import flask
 from flask import Flask, request, jsonify
+=======
+>>>>>>> parent of 3d81fb4 (afds)
 import subprocess
-
-app = Flask(__name__)
+import sys
 
 def generate_ai_content(prompt):
-    result = subprocess.run(['ollama', 'run', 'llama2', prompt], capture_output=True, text=True)
+    result = subprocess.run(['ollama', 'run', 'llama3.1', prompt], capture_output=True, text=True)
     return result.stdout
 
 def generate_blog_post(title):
@@ -16,18 +18,16 @@ def generate_comments(post_content):
     prompt = f"Generate 3 short, diverse comments for the following blog post:\n\n{post_content}"
     return generate_ai_content(prompt)
 
-@app.route('/generate-ai-content', methods=['POST'])
-def generate_content():
-    data = request.json
-    title = data.get('title', '')
-
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python ai_content_generator.py <title>")
+        sys.exit(1)
+    
+    title = sys.argv[1]
     post_content = generate_blog_post(title)
     comments = generate_comments(post_content)
 
-    return jsonify({
-        'content': post_content,
-        'comments': comments
-    })
-
-if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    print("Generated Blog Post:")
+    print(post_content)
+    print("\nGenerated Comments:")
+    print(comments)

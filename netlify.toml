@@ -5,12 +5,3 @@
 
 [build.environment]
   JEKYLL_ENV = "production"
-
-[[redirects]]
-  from = "/generate-ai-content"
-  to = "http://localhost:5000/generate-ai-content"
-  status = 200
-  force = true
-  
-[dev]
-  command = "jekyll serve"
