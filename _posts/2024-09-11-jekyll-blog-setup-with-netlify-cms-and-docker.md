@@ -139,34 +139,6 @@ cat << EOF > admin/index.html
 </body>
 </html>
 EOF
-
-# Step 6: Create .ruby-version file
-echo "Creating .ruby-version file..."
-echo "3.0.0" > .ruby-version
-
-
-
-# Step 8: Build and run Docker container
-echo "Building and running Docker container..."
-docker-compose up -d
-
-# Step 9: Netlify setup
-echo "Setting up Netlify..."
-netlify init
-
-# Step 10: Push to GitHub (assumes you've created a repo)
-echo "Please enter your GitHub repository URL:"
-read repo_url
-git remote add origin $repo_url
-git push -u origin main
-
-echo "Setup complete! Your blog is now running locally and set up for Netlify deployment."
-echo "Next steps:"
-echo "1. Visit http://localhost:4000 to view your blog locally."
-echo "2. Use the Netlify CMS at http://localhost:4000/admin to manage content."
-echo "3. Edit files directly in your preferred code editor."
-echo "4. Commit and push changes to trigger Netlify deployment."
-
 ```
 
 ---
@@ -273,4 +245,6 @@ For additional resources:
 - [Jekyll Documentation](https://jekyllrb.com/docs/)
 - [Netlify CMS Documentation](https://www.netlifycms.org/docs/)
 - [Docker Documentation](https://docs.docker.com/)
+```
 
+This formatting will improve the structure and readability when rendered on your website, making it easier for users to follow along.
