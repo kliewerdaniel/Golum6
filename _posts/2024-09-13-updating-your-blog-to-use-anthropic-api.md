@@ -424,31 +424,7 @@ result = ai_powered_search(input_text, posts)
 Certainly! Let's continue with implementing the AI-powered search feature and add some more enhancements to your Jekyll blog.
 ## 22. Implementing an AI-Powered Search Feature (continued)
 Now, let's create a Jekyll plugin to integrate this AI-powered search:
-# _plugins/ai_search.rb
-require 'open3'
-require 'json'
-module Jekyll
-class AISearch < Liquid::Tag
-def initialize(tag_name, text, tokens)
-super
-@query = text.strip
-end
-def render(context)
-site = context.registers[:site]
-posts = site.posts.docs.map { |post| { title: post.data['title'], excerpt: post.data['excerpt'] } }
-command = "python ai_content_generator.py search \"#{@query}\" '#{posts.to_json.gsub("'", "\\'")}'"
-stdout, stderr, status = Open3.capture3(command)
-if status.success?
-results = stdout.strip.split("\n")
-"<ul>" + results.map { |result| "<li>#{result}</li>" }.join + "</ul>"
-else
-Jekyll.logger.error "Error in AI search: #{stderr}"
-"<p>Search failed. Please try again later.</p>"
-end
-end
-end
-end
-Liquid::Template.register_tag('ai_search', Jekyll::AISearch)
+
 
 Now you can use this in your search results page
 <!-- search.html -->
