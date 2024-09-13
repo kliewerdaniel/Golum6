@@ -1,17 +1,14 @@
 ---
 layout: post
 title: Updating Your Jekyll Blog to Use Anthropic API
-date: 2024-09-13T03:51:46.803Z
+date: 2024-09-13T23:51:46.803Z
 ---
 # Updating Your Jekyll Blog to Use Anthropic API
 ## 1. Install Required Python Packages
 First, make sure you have the necessary Python packages installed:
-```bash
 pip install anthropic requests
-```
 ## 2. Update the AI Content Generator Script
 Replace the contents of `ai_content_generator.py` with the following:
-```python
 import sys
 import anthropic
 import os
@@ -42,40 +39,40 @@ print("Generated Blog Post:")
 print(post_content)
 print("\nGenerated Comments:")
 print(comments)
-```
+
 ## 3. Secure Your API Key
 Instead of hardcoding your API key, it's best to use environment variables. You can set this in your shell:
-```bash
+
 export ANTHROPIC_API_KEY="your_actual_api_key_here"
-```
+
 For Netlify deployment, you can add this as an environment variable in your Netlify site settings.
 ## 4. Update the Jekyll Plugin
 The Jekyll plugin (`_plugins/ai_content_generator.rb`) doesn't need to change, as it still calls the Python script in the same way.
 ## 5. Test Locally
 Run your Jekyll site locally to test the changes:
-```bash
+
 bundle exec jekyll serve
-```
+
 ## 6. Update Dockerfile (if using Docker)
 If you're using Docker, update your Dockerfile to install the required Python packages:
-```dockerfile
+
 # ... (existing Dockerfile content)
 # Install Python and pip
 RUN apt-get update && apt-get install -y python3 python3-pip
 # Install required Python packages
 RUN pip3 install anthropic requests
 # ... (rest of your Dockerfile)
-```
+
 ## 7. Update docker-compose.yml
 If you're using Docker Compose, update your `docker-compose.yml` to pass the API key as an environment variable:
-```yaml
+
 version: '3'
 services:
 site:
 # ... (existing configuration)
 environment:
 - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-```
+
 ## 8. Deploy to Netlify
 Push your changes to GitHub, and Netlify will automatically deploy your updated site.
 Remember to add the `ANTHROPIC_API_KEY` as an environment variable in your Netlify site settings.
@@ -87,7 +84,6 @@ Experiment with different prompts and settings in the `ai_content_generator.py` 
 That's it! Your Jekyll blog is now updated to use the Anthropic API for AI-enhanced content generation. The key changes are in the `ai_content_generator.py` script, where we've replaced the Ollama-specific code with Anthropic API calls. Here are some additional points to consider and potential enhancements:
 ## 11. Error Handling and Logging
 Enhance the `ai_content_generator.py` script with better error handling and logging:
-```python
 import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -105,10 +101,9 @@ return "Error generating content"
 except Exception as e:
 logger.error(f"Unexpected error: {e}")
 return "Error generating content"
-```
+
 ## 12. Caching AI-Generated Content
 To reduce API calls and improve performance, implement a simple caching mechanism:
-```python
 import json
 import os
 CACHE_FILE = "ai_content_cache.json"
@@ -128,15 +123,13 @@ response = client.completion(...) # Your existing API call
 cache[prompt] = response.completion
 save_cache(cache)
 return response.completion
-```
+
 ## 13. Customizing AI Prompts
 Create a configuration file (`ai_config.yml`) to easily customize prompts:
-```yaml
 blog_post_prompt: "Write a short blog post with the title: {title}. The post should be informative and engaging, suitable for a technical audience."
 comments_prompt: "Generate 3 short, diverse comments for the following blog post. Each comment should offer a unique perspective or insight:\n\n{post_content}"
-```
+
 Then update `ai_content_generator.py` to use these custom prompts:
-```python
 import yaml
 with open('ai_config.yml', 'r') as f:
 ai_config = yaml.safe_load(f)
@@ -146,10 +139,8 @@ return generate_ai_content(prompt)
 def generate_comments(post_content):
 prompt = ai_config['comments_prompt'].format(post_content=post_content)
 return generate_ai_content(prompt)
-```
 ## 14. Implementing Rate Limiting
 To avoid hitting API rate limits, implement a simple rate limiter:
-```python
 import time
 last_request_time = 0
 MIN_REQUEST_INTERVAL = 1 # Minimum time between requests in seconds
@@ -161,10 +152,8 @@ time.sleep(MIN_REQUEST_INTERVAL - (current_time - last_request_time))
 content = generate_ai_content(prompt)
 last_request_time = time.time()
 return content
-```
 ## 15. Enhancing the Jekyll Plugin
 Update the Jekyll plugin to generate more diverse AI content:
-```ruby
 module Jekyll
 class AIContentGenerator < Generator
 def generate(site)
@@ -206,9 +195,7 @@ end
 end
 end
 end
-```
 Then update `ai_content_generator.py` to handle these new actions:
-```python
 def generate_related_topics(content):
 prompt = f"Generate 5 related topics for the following blog post content:\n\n{content}"
 return generate_ai_content(prompt)
@@ -228,10 +215,8 @@ else:
 print(f"Unknown action: {action}")
 sys.exit(1)
 print(result)
-```
 ## 16. Updating Post Layout
 Update your post layout (`_layouts/post.html`) to display the new AI-generated content:
-```html
 <article class="post">
 <!-- Existing post content -->
 {% if page.ai_summary %}
@@ -255,10 +240,9 @@ Update your post layout (`_layouts/post.html`) to display the new AI-generated c
 </div>
 {% endif %}
 </article>
-```
+
 ## 17. Adding User Feedback Mechanism
 Implement a simple feedback mechanism for AI-generated content:
-```html
 <div class="ai-feedback">
 <p>Was this AI-generated content helpful?</p>
 <button onclick="sendFeedback('positive')">👍 Yes</button>
@@ -277,13 +261,11 @@ alert('Thank you for your feedback!');
 });
 }
 </script>
-```
 You'll need to implement a server-side endpoint to handle this feedback, which could be used to fine-tune your prompts or AI usage over time.
 ## 18. Implementing Content Moderation
 To ensure the AI-generated content is appropriate for your blog, you can implement a content moderation step. Here's how you can extend your setup to include this:
 ## 18. Implementing Content Moderation
 Update the `ai_content_generator.py` script to include a moderation function:
-```python
 def moderate_content(content):
 prompt = f"""Please review the following content and determine if it's appropriate for a public blog.
 If it contains any inappropriate language, offensive content, or sensitive information, please flag it.
@@ -311,10 +293,8 @@ def generate_related_topics(content):
 return generate_and_moderate(lambda: generate_ai_content(f"Generate 5 related topics for the following blog post content:\n\n{content}"))
 def generate_summary(content):
 return generate_and_moderate(lambda: generate_ai_content(f"Summarize the following blog post in 2-3 sentences:\n\n{content}"))
-```
 ## 19. Implementing A/B Testing for AI Content
 To optimize your AI-generated content, you can implement a simple A/B testing mechanism:
-```ruby
 # In your Jekyll plugin (_plugins/ai_content_generator.rb)
 module Jekyll
 class AIContentGenerator < Generator
@@ -334,18 +314,14 @@ end
 # ... (rest of your plugin code)
 end
 end
-```
 Then, update your post layout to include the A/B test version:
-```html
 {% if page.ai_comments %}
 <div class="ai-comments" data-ab-version="{{ page.ab_test_version }}">
 {{ page.ai_comments | markdownify }}
 </div>
 {% endif %}
-```
 ## 20. Implementing Progressive Enhancement
 To ensure your blog works well even if the AI content generation fails, implement progressive enhancement:
-```html
 <!-- In your post layout -->
 <article class="post">
 <!-- Original content -->
@@ -378,12 +354,10 @@ document.getElementById('ai-content').style.display = 'block';
 this.style.display = 'none';
 });
 </script>
-```
 This approach allows users to choose whether to load the AI-generated content, improving initial page load times and providing a fallback if AI content generation fails.
 ## 21. Implementing Personalized Content Recommendations
 You can use the Anthropic API to generate personalized content recommendations based on a user's reading history. Here's how you might implement this:
 First, add a new function to `ai_content_generator.py`:
-```python
 def generate_personalized_recommendations(user_history):
 history_str = "\n".join(user_history)
 prompt = f"""Based on the following list of blog post titles that a user has read, suggest 3 new blog post topics that this user might be interested in:
@@ -398,9 +372,7 @@ return generate_ai_content(prompt)
 # Add this to your main block
 elif action == "generate_recommendations":
 result = generate_personalized_recommendations(input_text.split('\n'))
-```
 Then, create a new Jekyll plugin to generate recommendations:
-```ruby
 # _plugins/personalized_recommendations.rb
 require 'open3'
 module Jekyll
@@ -419,9 +391,8 @@ end
 end
 end
 end
-```
+
 Finally, display these recommendations on your home page or in a sidebar:
-```html
 <!-- index.html or _includes/sidebar.html -->
 <div class="personalized-recommendations">
 <h3>Recommended for You</h3>
@@ -431,11 +402,9 @@ Finally, display these recommendations on your home page or in a sidebar:
 {% endfor %}
 </ul>
 </div>
-```
 ## 22. Implementing an AI-Powered Search Feature
 You can use the Anthropic API to power a more intelligent search feature for your blog. Here's a basic implementation:
 Add a new function to `ai_content_generator.py`:
-```python
 def ai_powered_search(query, posts):
 posts_str = "\n".join([f"Title: {post['title']}\nExcerpt: {post['excerpt']}" for post in posts])
 prompt = f"""Given the following blog posts and a search query, return the titles of the 3 most relevant posts. If there are fewer than 3 relevant posts, return only the relevant ones.
@@ -455,7 +424,6 @@ result = ai_powered_search(input_text, posts)
 Certainly! Let's continue with implementing the AI-powered search feature and add some more enhancements to your Jekyll blog.
 ## 22. Implementing an AI-Powered Search Feature (continued)
 Now, let's create a Jekyll plugin to integrate this AI-powered search:
-```ruby
 # _plugins/ai_search.rb
 require 'open3'
 require 'json'
@@ -481,18 +449,16 @@ end
 end
 end
 Liquid::Template.register_tag('ai_search', Jekyll::AISearch)
-```
+
 Now you can use this in your search results page:
-```html
 <!-- search.html -->
 <h1>Search Results</h1>
 <p>You searched for: {{ page.search_term }}</p>
 <h2>AI-Powered Results:</h2>
 {% ai_search page.search_term %}
-```
+
 ## 23. Implementing AI-Generated Meta Descriptions
 To improve SEO, you can use the Anthropic API to generate meta descriptions for your posts. Add this function to `ai_content_generator.py`:
-```python
 def generate_meta_description(title, content):
 prompt = f"""Generate a compelling meta description for a blog post with the following title and content. The meta description should be under 160 characters and entice readers to click through to the article.
 Title: {title}
@@ -505,9 +471,8 @@ elif action == "generate_meta_description":
 title = sys.argv[2]
 content = sys.argv[3]
 result = generate_meta_description(title, content)
-```
+
 Update your Jekyll plugin to use this:
-```ruby
 # In your _plugins/ai_content_generator.rb
 def generate(site)
 site.posts.docs.each do |post|
@@ -529,10 +494,8 @@ Jekyll.logger.error "Error generating meta description: #{stderr}"
 ""
 end
 end
-```
 ## 24. Implementing AI-Generated Social Media Posts
 To help promote your blog posts, you can use the Anthropic API to generate social media posts. Add this function to `ai_content_generator.py`:
-```python
 def generate_social_media_post(title, excerpt):
 prompt = f"""Create an engaging social media post to promote a blog article. The post should be suitable for Twitter (under 280 characters) and include relevant hashtags.
 Blog Title: {title}
@@ -546,9 +509,7 @@ social_media_post":
 title = sys.argv[2]
 excerpt = sys.argv[3]
 result = generate_social_media_post(title, excerpt)
-```
 Update your Jekyll plugin to use this:
-```ruby
 # In your _plugins/ai_content_generator.rb
 def generate(site)
 site.posts.docs.each do |post|
@@ -570,10 +531,8 @@ Jekyll.logger.error "Error generating social media post: #{stderr}"
 ""
 end
 end
-```
 ## 25. Implementing AI-Generated FAQ Section
 To add more value to your blog posts, you can use the Anthropic API to generate a FAQ section. Add this function to `ai_content_generator.py`:
-```python
 def generate_faq(content):
 prompt = f"""Based on the following blog post content, generate 3-5 frequently asked questions (FAQs) along with their answers. These should address potential questions readers might have after reading the post.
 Blog Content: {content[:1000]}...
@@ -589,9 +548,7 @@ return generate_ai_content(prompt)
 # Add this to your main block
 elif action == "generate_faq":
 result = generate_faq(input_text)
-```
 Update your Jekyll plugin to use this:
-```ruby
 # In your _plugins/ai_content_generator.rb
 def generate(site)
 site.posts.docs.each do |post|
@@ -613,10 +570,8 @@ Jekyll.logger.error "Error generating FAQ: #{stderr}"
 ""
 end
 end
-```
 ## 26. Displaying AI-Generated Content
 Update your post layout to include these new AI-generated elements:
-```html
 <!-- _layouts/post.html -->
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 <!-- ... existing post content ... -->
@@ -643,14 +598,12 @@ With these additions, your Jekyll blog now has several AI-enhanced features:
 5. A/B testing for AI content
 6. Personalized content recommendations
 7. AI-powered search
-8. AI-generated meta
-descriptions
+8. AI-generated meta descriptions
 9. AI-generated social media posts
 10. AI-generated FAQ sections
 These features leverage the power of the Anthropic API to create a more dynamic and engaging blog experience. Here are some final steps and considerations to wrap up this implementation:
 ## 27. Performance Optimization
 To ensure that your blog remains fast and responsive, consider implementing caching for AI-generated content:
-```ruby
 # _plugins/ai_content_cache.rb
 require 'yaml'
 module Jekyll
@@ -689,11 +642,9 @@ AIContentCache.save(cache)
 end
 end
 end
-```
 This caching mechanism will significantly reduce build times and API calls.
 ## 28. Error Handling and Logging
 Implement more robust error handling and logging:
-```ruby
 # _plugins/ai_content_generator.rb
 require 'logger'
 module Jekyll
@@ -715,10 +666,8 @@ end
 end
 end
 end
-```
 ## 29. Configuration Options
 Allow users to customize AI behavior through the Jekyll configuration:
-```yaml
 # _config.yml
 ai_content:
 enabled: true
@@ -726,9 +675,7 @@ generate_comments: true
 generate_faq: true
 generate_summary: true
 moderation: true
-```
 Then, in your plugin:
-```ruby
 def generate(site)
 ai_config = site.config['ai_content'] || {}
 return unless ai_config['enabled']
@@ -739,10 +686,8 @@ generate_summary(post) if ai_config['generate_summary']
 # ...
 end
 end
-```
 ## 30. Documentation
 Create documentation for your AI-enhanced Jekyll blog:
-```markdown
 # AI-Enhanced Jekyll Blog
 This Jekyll blog uses the Anthropic API to generate AI-enhanced content. Here's what you need to know:
 ## Setup
@@ -760,7 +705,6 @@ This Jekyll blog uses the Anthropic API to generate AI-enhanced content. Here's 
 - AI-generated FAQ sections
 ## Configuration
 You can customize AI behavior in `_config.yml`:
-```yaml
 ai_content
 :
 enabled: true
@@ -768,7 +712,6 @@ generate_comments: true
 generate_faq: true
 generate_summary: true
 moderation: true
-```
 ## Customization
 To modify AI prompts, edit the `ai_content_generator.py` file.
 ## Troubleshooting
@@ -777,10 +720,8 @@ If you encounter issues:
 2. Ensure all required Python packages are installed
 3. Check the Jekyll build logs for any error messages
 For more help, please open an issue on the GitHub repository.
-```
 ## 31. Testing
 Implement some basic tests to ensure your AI-enhanced features are working correctly:
-```ruby
 # test/test_ai_content_generator.rb
 require 'minitest/autorun'
 require 'jekyll'
@@ -820,11 +761,10 @@ doc.content = "This is a test post content."
 end
 end
 end
-```
 Run these tests with `ruby test/test_ai_content_generator.rb`.
 ## 32. Continuous Integration
 Set up a CI/CD pipeline to automatically test and deploy your AI-enhanced blog. Here's an example using GitHub Actions:
-```yaml
+
 # .github/workflows/ci.yml
 name: CI
 on: [push, pull_request]
@@ -847,10 +787,10 @@ run: ruby test/test_ai_content_generator.rb
 run: bundle exec jekyll build
 env:
 ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-```
+
 ## 33. Monitoring and Analytics
 Implement monitoring for your AI-generated content to track its performance:
-```javascript
+
 // assets/js/ai-analytics.js
 function trackAIContentInteraction(type) {
 if (typeof gtag !== 'undefined') {
@@ -868,11 +808,11 @@ trackAIContentInteraction(el.className);
 });
 });
 });
-```
+
 Include this script in your layout and set up Google Analytics or a similar service to track these events.
 ## 34. User Feedback System
 Implement a simple feedback system for AI-generated content:
-```html
+
 <!-- _includes/ai_feedback.html -->
 <div class="ai-feedback" data-type="{{ include.type }}">
 <p>Was this AI-generated {{ include.type }} helpful?</p>
@@ -893,9 +833,9 @@ alert('Thank you for your feedback!');
 }
 </
 script>
-```
+
 Include this feedback component in your post layout:
-```html
+
 <!-- _layouts/post.html -->
 {% if page.ai_comments %}
 <h2>AI-Generated Comments</h2>
@@ -907,7 +847,7 @@ Include this feedback component in your post layout:
 <div class="ai-faq">{{ page.ai_faq | markdownify }}</div>
 {% include ai_feedback.html type="faq" %}
 {% endif %}
-```
+
 ## 35. Final Touches
 1. Update your `README.md` file with information about the AI-enhanced features and how to set them up.
 2. Create a CHANGELOG.md file to track changes and new AI features.
