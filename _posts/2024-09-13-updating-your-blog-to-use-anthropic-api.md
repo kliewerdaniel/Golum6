@@ -3,82 +3,96 @@ layout: post
 title: Updating Your Jekyll Blog to Use Anthropic API
 date: 2024-09-13T11:51:00.000Z
 ---
-# Updating Your Jekyll Blog to Use Anthropic API
-## 1. Install Required Python Packages
-First, make sure you have the necessary Python packages installed:
-pip install anthropic requests
-## 2. Update the AI Content Generator Script
-Replace the contents of `ai_content_generator.py` with the following:
-import sys
-import anthropic
-import os
-# Set your Anthropic API key as an environment variable
-os.environ["ANTHROPIC_API_KEY"] = "your_api_key_here"
-client = anthropic.Client()
-def generate_ai_content(prompt):
-response = client.completion(
-prompt=f"{anthropic.HUMAN_PROMPT} {prompt}{anthropic.AI_PROMPT}",
-model="claude-2",
-max_tokens_to_sample=300,
-)
-return response.completion
-def generate_blog_post(title):
-prompt = f"Write a short blog post with the title: {title}"
-return generate_ai_content(prompt)
-def generate_comments(post_content):
-prompt = f"Generate 3 short, diverse comments for the following blog post:\n\n{post_content}"
-return generate_ai_content(prompt)
-if __name__ == "__main__":
-if len(sys.argv) < 2:
-print("Usage: python ai_content_generator.py <title>")
-sys.exit(1)
-title = sys.argv[1]
-post_content = generate_blog_post(title)
-comments = generate_comments(post_content)
-print("Generated Blog Post:")
-print(post_content)
-print("\nGenerated Comments:")
-print(comments)
+## Introduction
 
-## 3. Secure Your API Key
-Instead of hardcoding your API key, it's best to use environment variables. You can set this in your shell:
+In this update, we explore how to enhance your blog by integrating the Anthropic API. This integration can significantly improve your content creation process by leveraging advanced AI capabilities.
 
-export ANTHROPIC_API_KEY="your_actual_api_key_here"
+## Overview of the Anthropic API
 
-For Netlify deployment, you can add this as an environment variable in your Netlify site settings.
-## 4. Update the Jekyll Plugin
-The Jekyll plugin (`_plugins/ai_content_generator.rb`) doesn't need to change, as it still calls the Python script in the same way.
-## 5. Test Locally
-Run your Jekyll site locally to test the changes:
+The Anthropic API offers cutting-edge natural language processing tools that can generate, analyze, and refine text. By integrating this API, you can:
 
-bundle exec jekyll serve
+- Generate AI-driven content
+- Enhance user engagement with personalized responses
+- Automate content creation and management
 
-## 6. Update Dockerfile (if using Docker)
-If you're using Docker, update your Dockerfile to install the required Python packages:
+## Benefits of Using Anthropic API
 
-# ... (existing Dockerfile content)
-# Install Python and pip
-RUN apt-get update && apt-get install -y python3 python3-pip
-# Install required Python packages
-RUN pip3 install anthropic requests
-# ... (rest of your Dockerfile)
+1. **Enhanced Content Generation**: The API can create high-quality, relevant content based on the inputs you provide.
+2. **Improved User Interaction**: With AI-powered responses, users receive more engaging and contextually appropriate replies.
+3. **Efficiency**: Automate repetitive content tasks, saving time and effort.
 
-## 7. Update docker-compose.yml
-If you're using Docker Compose, update your `docker-compose.yml` to pass the API key as an environment variable:
+## How to Integrate the Anthropic API
 
-version: '3'
-services:
-site:
-# ... (existing configuration)
-environment:
-- ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+### Prerequisites
 
-## 8. Deploy to Netlify
-Push your changes to GitHub, and Netlify will automatically deploy your updated site.
-Remember to add the `ANTHROPIC_API_KEY` as an environment variable in your Netlify site settings.
-## 9. Create a New Blog Post to Test
-Create a new blog post using Netlify CMS or manually in the `_posts` directory to test the AI-enhanced features.
-## 10. Fine-tune and Iterate
-Experiment with different prompts and settings in the `ai_content_generator.py` script to get the best results for your blog.
+Before you begin, ensure you have:
+
+- An active account with Anthropic
+- API keys for authentication
+- Basic knowledge of Jekyll and Liquid tags
+
+### Step 1: Install Required Gems
+
+Add the following gems to your `Gemfile`:
+
+```ruby
+gem 'httparty'   # For making HTTP requests
+gem 'json'       # For parsing JSON responses
+```
+
+Run `bundle install` to install the gems.
+
+### Step 2: Create a Jekyll Plugin
+
+In the `_plugins` directory of your Jekyll project, create a file named `ai_search_tag.rb`:
+
+```ruby
+# _plugins/ai_search_tag.rb
+require 'httparty'
+require 'json'
+
+module Jekyll
+  class AISearch < Liquid::Tag
+    def initialize(tag_name, text, tokens)
+      super
+      @text = text.strip
+    end
+
+    def render(context)
+      api_key = ENV['ANTHROPIC_API_KEY']
+      response = HTTParty.post("https://api.anthropic.com/v1/generate", 
+                               body: { prompt: @text }.to_json,
+                               headers: { "Authorization" => "Bearer #{api_key}", 
+                                          "Content-Type" => "application/json" })
+      result = JSON.parse(response.body)
+      result["text"]
+    end
+  end
+end
+
+Liquid::Template.register_tag('ai_search', Jekyll::AISearch)
+```
+
+### Step 3: Use the Tag in Your Posts
+
+To utilize the `ai_search` tag in your blog posts, insert the tag into your Markdown files:
+
+```markdown
+## Example Post
+
+Here is an example of using the Anthropic API in your post:
+
+{% ai_search "Generate a summary of Jekyll blog post integration" %}
+```
+
+### Step 4: Configure Environment Variables
+
+Set up the environment variable `ANTHROPIC_API_KEY` with your API key. Ensure this key is kept secure and not hard-coded into your project files.
+
+## Conclusion
+
+Integrating the Anthropic API into your Jekyll blog can transform how you manage and generate content. By following these steps, you can leverage AI to create engaging and relevant content more efficiently.
+
+For further details and advanced configurations, refer to the [Anthropic API documentation](https://docs.anthropic.com).
+
 ---
-That's it! Your Jekyll blog is now updated to use the Anthropic API for AI-enhanced content generation. The key changes are in the `ai_content_generator.py` script, where we've replaced the Ollama-specific code with Anthropic API calls. 
