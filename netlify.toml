@@ -1,6 +1,6 @@
 [build]
   command = "jekyll build"
-  publish = "/opt/build/repo/_site"
+  publish = "_site"
 
 [functions]
   directory = "netlify/functions"
