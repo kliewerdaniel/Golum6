@@ -31,9 +31,9 @@ github_username:  kliewerdaniel
 theme: minima
 plugins:
   - jekyll-feed
-<<<<<<< HEAD
+
   - jekyll-admin
-<<<<<<< HEAD
+
 =======
 >>>>>>> parent of 033c4d1 (dfsa)
 
