@@ -242,7 +242,7 @@ jobs:
 To provide quick overviews of your blog posts, you can use Ollama to generate summaries:
 
 1. Create a new file `generate-summaries.js`:
-<﻿!--
+<!--
 ```javascript
 const ollama = require('./config');
 const fs = require('fs');
