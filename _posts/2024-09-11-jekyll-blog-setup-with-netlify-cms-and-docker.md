@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: home
 title: Jekyll Blog Setup with Netlify CMS and Docker
 date: 2024-09-11T23:51:46.803Z
 ---

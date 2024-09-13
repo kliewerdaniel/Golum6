@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: home
 title: Building an AI-Enhanced Jekyll Blog with Netlify CMS, Docker, and Ollama
 date: 2024-09-12T15:26:46.465Z
 ---
