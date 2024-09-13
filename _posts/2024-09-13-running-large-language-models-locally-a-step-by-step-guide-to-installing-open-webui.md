@@ -1,6 +1,6 @@
 ---
-title: "Comprehensive Guide to Building a Jekyll Blog with Netlify CMS, Docker,
-  and AI Integration: Leveraging Ollama for Enhanced Content Creation"
+title: Comprehensive Guide to Building a Jekyll Blog with Netlify CMS, Docker,
+  and AI Integration: Leveraging Ollama for Enhanced Content Creation
 date: 2024-09-13T20:37:49.376Z
 ---
 #### Introduction
