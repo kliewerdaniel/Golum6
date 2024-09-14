@@ -3,13 +3,13 @@ layout: home
 title: "Creating an AI-Enhanced Jekyll Blog: From Setup to LLM Integration"
 date: 2024-09-14T12:46:46.145Z
 ---
-Introduction:
+# Introduction:
 
 In this comprehensive guide, I'll walk you through the process of creating a Jekyll blog with Netlify CMS, Docker integration, and how to enhance it with locally-hosted large language models (LLMs). We'll cover everything from initial setup to advanced AI integration, with tips on using GitHub Desktop and Netlify for seamless deployment.
 
-Part 1: Setting Up Your Jekyll Blog
+## Part 1: Setting Up Your Jekyll Blog
 
-1.1 Initial Setup:
+### 1.1 Initial Setup:
 To begin, we'll use a shell script to automate much of the initial setup. Here's a breakdown of what our script (let's call it `setup_blog.sh`) does:
 
 ```bash
@@ -78,7 +78,7 @@ docker-compose up -d
 
 This script creates a new Jekyll site, sets up Git, creates necessary Docker files, and configures Netlify CMS.
 
-1.2 Using GitHub Desktop:
+### 1.2 Using GitHub Desktop:
 After running the script, open GitHub Desktop and follow these steps:
 1. Click "Add an Existing Repository from your Hard Drive"
 2. Navigate to your blog's directory and select it
@@ -88,7 +88,7 @@ After running the script, open GitHub Desktop and follow these steps:
 
 Tip: Use GitHub Desktop's "History" tab to review changes before committing. This helps in maintaining a clean commit history.
 
-1.3 Deploying with Netlify:
+### 1.3 Deploying with Netlify:
 1. Log in to your Netlify account
 2. Click "New site from Git"
 3. Choose GitHub as your Git provider
@@ -98,9 +98,9 @@ Tip: Use GitHub Desktop's "History" tab to review changes before committing. Thi
 
 Tip: Enable "Deploy previews" in Netlify settings to review changes before they go live on your main site.
 
-Part 2: Integrating Large Language Models
+## Part 2: Integrating Large Language Models
 
-2.1 Setting Up OpenWebUI with Docker:
+### 2.1 Setting Up OpenWebUI with Docker:
 OpenWebUI is an open-source ChatG
 PT-like interface that can work with various LLMs. Let's set it up using Docker:
 
@@ -134,7 +134,7 @@ PT-like interface that can work with various LLMs. Let's set it up using Docker:
 
 Now, you can access OpenWebUI at `http://localhost:8080`.
 
-2.2 Using Free Models with OpenWebUI:
+### 2.2 Using Free Models with OpenWebUI:
 1. Open OpenWebUI in your browser
 2. Click on "Model" in the top-right corner
 3. Select "Download new model"
@@ -143,7 +143,7 @@ Now, you can access OpenWebUI at `http://localhost:8080`.
 
 Tip: Smaller models like "tinyllama" or "orca-mini" are faster to download and run on less powerful hardware.
 
-2.3 Integrating LLM-generated Content into Your Blog:
+### 2.3 Integrating LLM-generated Content into Your Blog:
 Now that we have a local LLM running, let's create a script to generate blog post ideas:
 
 ```python
@@ -167,9 +167,9 @@ print(ideas)
 
 Save this as `generate_ideas.py` in your blog's root directory.
 
-Part 3: Streamlining Your Workflow
+## Part 3: Streamlining Your Workflow
 
-3.1 Creating a Master Setup Script:
+### 3.1 Creating a Master Setup Script:
 Let's create a master script that combines all our setup steps:
 
 ```bash
@@ -207,24 +207,24 @@ echo "OpenWebUI is available at http://localhost:8080"
 
 Save this as `master_setup.sh`.
 
-3.2 GitHub Desktop Workflow Tips:
+### 3.2 GitHub Desktop Workflow Tips:
 - Use branches for different features or posts
 - Utilize the "Fetch origin" button regularly to stay updated with remote changes
 - Take advantage of the diff view to review changes before committing
 
-3.3 Netlify Deployment Tips:
+### 3.3 Netlify Deployment Tips:
 - Set up branch deploys to preview changes from non-main branches
 - Use deploy contexts to customize build settings for different branches
 - Leverage Netlify Functions for serverless backend functionality
 
-Conclusion:
+## Conclusion:
 We've covered setting up a Jekyll blog with Netlify CMS, integrating it with GitHub and Netlify for easy deployment, and enhancing it with locally-hosted LLMs using OpenWebUI. By leveraging shell scripts and Docker, we've created a streamlined workflow that combines the power of static site generators with the flexibility of AI-assisted content creation.
 
 Remember to always respect licensing terms when using open-source modelsand be mindful of the computational resources required when running LLMs locally.
 
-Part 4: Advanced LLM Integration Techniques
+## Part 4: Advanced LLM Integration Techniques
 
-4.1 Automating Content Generation:
+### 4.1 Automating Content Generation:
 Let's expand our LLM integration by creating a script that generates entire blog post drafts:
 
 ```python
@@ -271,7 +271,7 @@ if __name__ == "__main__":
 
 Save this as `generate_post.py`. This script generates a full blog post draft and saves it in the correct format for Jekyll.
 
-4.2 Implementing AI-Powered Comments:
+### 4.2 Implementing AI-Powered Comments:
 To simulate user engagement, we can create an AI-powered commenting system:
 
 ```python
@@ -311,7 +311,7 @@ print(comment)
 
 Save this as `generate_comment.py`. You can integrate this with your blog's commenting system to add AI-generated comments for increased engagement.
 
-4.3 Fine-tuning LLMs for Your Blog's Style:
+### 4.3 Fine-tuning LLMs for Your Blog's Style:
 To make the AI-generated content more aligned with your writing style, consider fine-tuning the model:
 
 1. Prepare a dataset of your existing blog posts in a format suitable for fine-tuning (e.g., JSON Lines).
@@ -320,9 +320,9 @@ To make the AI-generated content more aligned with your writing style, consider 
 
 This process will help the LLM generate content that more closely matches your unique voice and style.
 
-Part 5: Optimizing Performance and Security
+## Part 5: Optimizing Performance and Security
 
-5.1 Caching LLM Responses:
+### 5.1 Caching LLM Responses:
 To reduce load on your local machine and improve response times, implement a caching system:
 
 ```python
@@ -362,7 +362,7 @@ print(response)
 
 This caching system uses Redis to store LLM responses, reducing redundant computations and speeding up repeated queries.
 
-5.2 Implementing Rate Limiting:
+### 5.2 Implementing Rate Limiting:
 To prevent overuse of your local LLM, implement a simple rate limiting mechanism:
 
 ```python
@@ -391,16 +391,16 @@ def generate_blog_post(title):
 
 This decorator limits the number of calls to the `generate_blog_post` function to 5 times per minute.
 
-5.3 Securing Your Local LLM:
+### 5.3 Securing Your Local LLM:
 While running an LLM locally is generally more secure than using cloud-based services, it's still important to implement some basic security measures:
 
 1. Use a firewall to restrict access to the Ollama API (port 11434) and OpenWebUI (port 8080) to only your local network.
 2. Implement authentication for OpenWebUI by setting up a reverse proxy with basic auth.
 3. Regularly update your Ollama and OpenWebUI installations to get the latest security patches.
 
-Part 6: Enhancing Your Blog with AI-Powered Features
+## Part 6: Enhancing Your Blog with AI-Powered Features
 
-6.1 Automated Content Summarization:
+### 6.1 Automated Content Summarization:
 Create a script to automatically generate summaries for your blog posts:
 
 ```python
@@ -425,7 +425,7 @@ summary = summarize_post(post_content)
 post['summary'] = summary  # Add to frontmatter
 ```
 
-6.2 AI-Powered SEO Optimization:
+### 6.2 AI-Powered SEO Optimization:
 Implement an AI assistant to help optimize your posts for search engines:
 
 ```python
@@ -456,7 +456,7 @@ seo_suggestions = seo_optimize(post_title, post_content)
 print(seo_suggestions)
 ```
 
-6.3 Automated Content Scheduling:
+### 6.3 Automated Content Scheduling:
 Create a system to automatically generate and schedule blog posts:
 
 ```python
@@ -488,9 +488,9 @@ while True:
 
 Run this script in the background to automatically generate and publish weekly blog posts.
 
-Part 7: Advanced GitHub and Netlify Integration
+## Part 7: Advanced GitHub and Netlify Integration
 
-7.1 GitHub Actions for Automated Testing:
+### 7.1 GitHub Actions for Automated Testing:
 Create a GitHub Action to automatically test your Jekyll site before deployment:
 
 ```yaml
@@ -523,7 +523,7 @@ jobs:
 
 This action builds your Jekyll site and runs HTMLProofer to check for broken links and HTML issues.
 
-7.2 Netlify Build Plugins:
+### 7.2 Netlify Build Plugins:
 Enhance your Netlify builds with plugins. For example, to automatically optimize images:
 
 1. Install the Netlify CLI: `npm install netlify-cli -g`
@@ -542,7 +542,7 @@ ignore = ["*.png"]
 
 This plugin will automatically optimize your images during the Netlify build process.
 
-7.3 Custom Netlify Functions:
+### 7.3 Custom Netlify Functions:
 Create a Netlify Function to handle dynamic content, such as a contact form:
 
 1. Create a `netlify/functions` directory in your project root.
@@ -575,7 +575,7 @@ exports.handler = async (event, context) => {
 
 Now you can use this function to handle form submissions without a backend server.
 
-Conclusion:
+## Conclusion:
 We've covered a wide range of topics, from setting up a Jekyll blog with Netlify CMS to integrating AI-powered features using locally-hosted LLMs. We've also explored advanced GitHub and Netlify integrations to streamline your workflow and enhance your blog's functionality.
 
 Remember that while AI can greatly assist in content creation and blog management, it's important to maintain your unique voice and ensure the quality of the content. Always review and edit AI-generated content before publishing to ensure it meets your standards and accurately represents your thoughts and expertise.
