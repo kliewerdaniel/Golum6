@@ -3,6 +3,8 @@ layout: home
 title: Enhancing Your Jekyll Blog with AI-Generated Persona Comments
 date: 2024-09-15T12:30:38.348Z
 ---
+# Enhancing Your Jekyll Blog with AI-Generated Persona Comments
+
 ## Introduction
 
 In this guide, we'll explore how to enhance your Jekyll blog with AI-generated comments using various personas. This approach can help you gain diverse perspectives on your writing, including critical ones, and create a more engaging journaling experience. We'll use locally-hosted large language models (LLMs) to generate these comments, providing a unique way to reflect on your blog posts or journal entries.
