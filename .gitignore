@@ -7,3 +7,11 @@ vendor
 # Local Netlify folder
 .netlify
 .DS_Store
+
+
+personas.py
+generate_comments.py
+
+blog_venv
+__pycache__
+
