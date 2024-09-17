@@ -5,6 +5,7 @@ _site
 vendor
 
 
+
 __pycache__
 blog_env
 # Local Netlify folder
