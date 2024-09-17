@@ -1,3 +1,20 @@
-<div class="post-content"></div>
+---
+layout: home
+---
+<article class="post">
+  <div class="entry">
     {{ content }}
   </div>
+
+  {% if page.ai_comments %}
+  <h2>AI-Generated Perspectives</h2>
+  <div class="ai-comments">
+    {% for comment in page.ai_comments %}
+    <div class="ai-comment">
+      <h3>{{ comment.persona }}</h3>
+      <p>{{ comment.comment }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</article>
