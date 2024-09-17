@@ -43,14 +43,7 @@ Create a new file for post meta:
 
 ```html
 <span class="post-meta">
- {{ "{{ page.date | date: '%b %-d, %Y' }}" }}
- {% if page.categories != empty %}
-   • Categories: {{ "{{ page.categories | join: ', ' }}" }}
- {% endif %}
- {% if page.tags != empty %}
-   • Tags: {{ "{{ page.tags | join: ', ' }}" }}
- {% endif %}
- • {% include reading-time.html %}
+ 
 </span>
 ```
 
@@ -59,12 +52,7 @@ Create the `reading-time.html`:
 
 
 ```html
-{% assign words = content | number_of_words %}
-{% if words < 360 %}
- 1 min read
-{% else %}
- {{ "{{ words | divided_by: 180 }}" }} mins read
-{% endif %}
+
 ```
 
 
@@ -144,9 +132,7 @@ And add it to the layout:
 
 
 ```html
-{% if site.google_analytics %}
- {% include google-analytics.html %}
-{% endif %}
+
 ```
 
 
@@ -235,20 +221,7 @@ echo "Image optimization complete!"
 
 
 ```html
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "BlogPosting",
- "headline": "{{ "{{ page.title }}" }}",
- "datePublished": "{{ "{{ page.date | date_to_xmlschema }}" }}",
- "dateModified": "{{ "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}" }}",
- "author": {
-   "@type": "Person",
-   "name": "{{ "{{ site.author }}" }}"
- },
- "description": "{{ "{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}" }}"
-}
-</script>
+
 ```
 
 
