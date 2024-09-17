@@ -4,9 +4,9 @@ _site
 .jekyll-metadata
 vendor
 
-blog_env
-__pycache__
 
+__pycache__
+blog_env
 # Local Netlify folder
 .netlify
 .DS_Store
